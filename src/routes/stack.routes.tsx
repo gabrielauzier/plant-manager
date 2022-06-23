@@ -6,6 +6,7 @@ import { UserIdentification } from "../screens/UserIdentification";
 import { Confirmation } from "../screens/Confirmation";
 import { PlantSelect } from "../screens/PlantSelect";
 import { PlantSave } from "../screens/PlantSave";
+import { Success } from "../screens/Success";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -35,6 +36,11 @@ export function StackRoutes() {
       <Screen
         name="PlantSave"
         component={PlantSave}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="Success"
+        component={Success}
         options={{ headerShown: false }}
       />
     </Navigator>

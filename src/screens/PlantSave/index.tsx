@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SvgFromUri } from "react-native-svg";
@@ -18,7 +18,6 @@ import {
   RegisterButton,
   ButtonText,
 } from "./styles";
-import { Text } from "react-native";
 import { BackButton } from "../../components/BackButton";
 
 interface PlantSaveParams {
@@ -28,6 +27,12 @@ interface PlantSaveParams {
 export function PlantSave() {
   const route = useRoute();
   const { plant } = route.params as PlantSaveParams;
+
+  const { navigate } = useNavigation();
+
+  function handleRegister() {
+    navigate("Success");
+  }
 
   return (
     <Container>
@@ -48,7 +53,7 @@ export function PlantSave() {
 
         <ContentText>Escolha o melhor horário para ser lembrado:</ContentText>
       </Content>
-      <RegisterButton>
+      <RegisterButton onPress={handleRegister}>
         <ButtonText>Cadastrar planta</ButtonText>
       </RegisterButton>
     </Container>
