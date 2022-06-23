@@ -78,7 +78,7 @@ export const RegisterButton = styled(RectButton)`
   padding: 16px;
   border-radius: 15px;
   align-items: center;
-  margin: 0 ${RFValue(32)}px;
+  margin: 0 ${RFValue(32)}px ${RFValue(12)}px;
 ` as unknown as typeof RectButton;
 
 export const ButtonText = styled.Text`
