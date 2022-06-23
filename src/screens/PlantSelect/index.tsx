@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { EnvironmentButton } from "../../components/EnvironmentButton";
+import { Loading } from "../../components/Loading";
 import { PlantCardPrimary } from "../../components/PlantCardPrimary";
 import { PlantDTO } from "../../dtos/PlantDTO";
 import { api } from "../../services/api";
@@ -29,7 +30,11 @@ export function PlantSelect() {
   const [plants, setPlants] = useState<PlantDTO[]>([]);
   const [filteredPlants, setFilteredPlants] = useState<PlantDTO[]>([]);
   const [environments, setEnvironments] = useState<Environment[]>([]);
-  const [environmentSelected, setEnvironmentSelected] = useState("");
+  const [environmentSelected, setEnvironmentSelected] = useState("all");
+
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   function handleEnvironmentSelect(environment: string) {
     setEnvironmentSelected(environment);
@@ -57,19 +62,43 @@ export function PlantSelect() {
 
   async function fetchPlants() {
     try {
-      const { data } = await api.get("/plants?_sort=name&_order=asc");
-      setPlants(data);
+      const { data } = await api.get(
+        `/plants?_sort=name&_order=asc&_page=${page}&_limit=6`
+      );
+
+      if (!data) return setLoading(true);
+
+      if (page > 1) {
+        setPlants((oldValue) => [...oldValue, ...data]);
+        setFilteredPlants((oldValue) => [...oldValue, ...data]);
+      } else {
+        setPlants(data);
+        setFilteredPlants(data);
+      }
     } catch (err) {
       console.error(err);
     }
+    setLoading(false);
+    setLoadingMore(false);
+  }
+
+  function handleFetchMore(distance: number) {
+    if (distance < 1) return;
+
+    setLoadingMore(true);
+    setPage((oldValue) => oldValue + 1);
+    fetchPlants();
   }
 
   useEffect(() => {
+    setLoading(true);
     fetchPlants();
     fetchEnvironments();
   }, []);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <Container>
       <Header>
         <Greetings>
@@ -113,7 +142,10 @@ export function PlantSelect() {
           />
         )}
         numColumns={2}
-        ListFooterComponent={<View style={{ margin: 32 }} />}
+        onEndReachedThreshold={0.1}
+        onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
+        ListFooterComponent={loadingMore ? <ActivityIndicator /> : <></>}
+        ListFooterComponentStyle={{ margin: 32 }}
       />
     </Container>
   );
