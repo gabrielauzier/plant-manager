@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "plant-manager",
+    "name": "Plant Manager",
     "slug": "plant-manager",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
@@ -8,6 +8,8 @@
     "androidNavigationBar": {
       "barStyle": "dark-content",
       "backgroundColor": "#FFFFFF"
-    }
+    },
+    "icon": "./assets/icon.png",
+    "primaryColor": "#32B768"
   }
 }
