@@ -19,6 +19,7 @@ export default {
     red: "#E83F5B",
   },
   fonts: {
+    light: "Jost_300Light",
     regular: "Jost_400Regular",
     medium: "Jost_500Medium",
     semibold: "Jost_600SemiBold",
