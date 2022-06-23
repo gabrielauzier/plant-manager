@@ -5,6 +5,7 @@ import { Welcome } from "../screens/Welcome";
 import { UserIdentification } from "../screens/UserIdentification";
 import { Confirmation } from "../screens/Confirmation";
 import { PlantSelect } from "../screens/PlantSelect";
+import { PlantSave } from "../screens/PlantSave";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -29,6 +30,11 @@ export function StackRoutes() {
       <Screen
         name="PlantSelect"
         component={PlantSelect}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="PlantSave"
+        component={PlantSave}
         options={{ headerShown: false }}
       />
     </Navigator>
