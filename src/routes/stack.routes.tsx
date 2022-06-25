@@ -7,27 +7,36 @@ import { Confirmation } from "../screens/Confirmation";
 import { PlantSelect } from "../screens/PlantSelect";
 import { PlantSave } from "../screens/PlantSave";
 import { Success } from "../screens/Success";
+import { useAuth } from "../hooks/auth";
 
 const { Navigator, Screen } = createStackNavigator();
 
 export function StackRoutes() {
+  const { user } = useAuth();
+
+  if (!user)
+    return (
+      <Navigator>
+        <Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ headerShown: false, gestureEnabled: false }}
+        />
+        <Screen
+          name="UserIdentification"
+          component={UserIdentification}
+          options={{ headerShown: false }}
+        />
+        <Screen
+          name="Confirmation"
+          component={Confirmation}
+          options={{ headerShown: false }}
+        />
+      </Navigator>
+    );
+
   return (
     <Navigator>
-      <Screen
-        name="Welcome"
-        component={Welcome}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
-      <Screen
-        name="UserIdentification"
-        component={UserIdentification}
-        options={{ headerShown: false }}
-      />
-      <Screen
-        name="Confirmation"
-        component={Confirmation}
-        options={{ headerShown: false }}
-      />
       <Screen
         name="PlantSelect"
         component={PlantSelect}
