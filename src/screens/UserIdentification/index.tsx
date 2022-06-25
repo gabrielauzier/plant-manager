@@ -6,14 +6,15 @@ import { Button } from "../../components/Button";
 
 import { Container, Input, Title, Emoji } from "./styles";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export function UserIdentification() {
   const [inputText, setInputText] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const localInputRef = useRef<TextInput>();
 
   const theme = useTheme();
   const { navigate } = useNavigation();
-
-  const localInputRef = useRef<TextInput>();
 
   const keyboardDidHideCallback = () => {
     localInputRef.current?.blur?.();
@@ -34,8 +35,11 @@ export function UserIdentification() {
     };
   }, []);
 
-  function handleConfirm() {
-    if (inputText) navigate("Confirmation");
+  async function handleConfirm() {
+    if (inputText) {
+      await AsyncStorage.setItem("@plantmanager:user", inputText);
+      navigate("Confirmation");
+    }
   }
 
   return (
