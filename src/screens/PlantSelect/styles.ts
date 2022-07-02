@@ -75,3 +75,17 @@ export const PlantList = styled(
   padding: ${RFValue(32)}px;
   flex-grow: 1;
 `;
+
+export const Sorry = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SorryMessage = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.body_dark};
+  font-size: ${RFValue(13)}px;
+  padding: 0 ${RFValue(42)}px;
+  text-align: center;
+`;
