@@ -18,7 +18,7 @@ export function Success() {
       <Button
         title="Muito obrigado :D"
         onPress={() => {
-          navigate("PlantSelect");
+          navigate("Tabs");
         }}
       />
     </Container>

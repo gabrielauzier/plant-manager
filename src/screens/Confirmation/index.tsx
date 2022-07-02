@@ -17,7 +17,7 @@ export function Confirmation() {
       <Button
         title="Começar"
         onPress={() => {
-          navigate("PlantSelect");
+          navigate("Tabs");
         }}
       />
     </Container>
