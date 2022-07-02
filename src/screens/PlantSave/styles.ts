@@ -49,6 +49,7 @@ export const WateringTip = styled.View`
   border-radius: 20px;
   position: relative;
   top: -${RFValue(45)}px;
+  margin-bottom: -${RFValue(30)}px;
 
   display: flex;
   flex-direction: row;
@@ -85,4 +86,11 @@ export const ButtonText = styled.Text`
   color: white;
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(17)}px;
+`;
+
+export const DateTime = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.semibold};
+  color: ${({ theme }) => theme.colors.green};
+  font-size: ${RFValue(28)}px;
+  margin-left: ${RFValue(14)}px;
 `;
