@@ -45,3 +45,11 @@ export const WaterHour = styled(Text)`
   font-size: ${RFValue(13)}px;
   line-height: ${RFValue(20)}px;
 `;
+
+export const RemoveButton = styled(RectButton)`
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+` as unknown as typeof RectButton;
