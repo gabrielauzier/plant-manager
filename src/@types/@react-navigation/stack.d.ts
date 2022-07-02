@@ -7,5 +7,6 @@ declare namespace ReactNavigation {
     PlantSave: NavigationStackProp<string>;
     PlantSelect: NavigationStackProp<string>;
     Success: NavigationStackProp<string>;
+    Tabs: NavigationStackProp<string>;
   }
 }

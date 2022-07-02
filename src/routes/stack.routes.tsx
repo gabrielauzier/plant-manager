@@ -8,6 +8,7 @@ import { PlantSelect } from "../screens/PlantSelect";
 import { PlantSave } from "../screens/PlantSave";
 import { Success } from "../screens/Success";
 import { useAuth } from "../hooks/auth";
+import { TabRoutes } from "./tab.routes";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -38,8 +39,8 @@ export function StackRoutes() {
   return (
     <Navigator>
       <Screen
-        name="PlantSelect"
-        component={PlantSelect}
+        name="Tabs"
+        component={TabRoutes}
         options={{ headerShown: false }}
       />
       <Screen
