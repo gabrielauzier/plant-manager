@@ -1,10 +1,15 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
+import { Alert } from "react-native";
 import WaterdropSvg from "../../assets/waterdrop.svg";
 import { Loading } from "../../components/Loading";
 import { PlantCardSecondary } from "../../components/PlantCardSecondary";
-import { getSavedPlants, PlantProps } from "../../libs/storage";
+import {
+  getSavedPlants,
+  PlantProps,
+  removePlantById,
+} from "../../libs/storage";
 
 import {
   Container,
@@ -37,6 +42,29 @@ export function MyPlants() {
   useEffect(() => {
     loadCurrentPlants();
   }, []);
+
+  async function handleRemove(plant: PlantProps) {
+    Alert.alert("Remover", `Deseja remover a ${plant.name}?`, [
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
+      {
+        text: "Remover",
+        onPress: async () => {
+          try {
+            await removePlantById(String(plant.id));
+
+            setMyPlants((oldPlants) =>
+              oldPlants.filter((item) => item.id !== plant.id)
+            );
+          } catch (error) {
+            console.error(error);
+          }
+        },
+      },
+    ]);
+  }
 
   useFocusEffect(
     useCallback(() => {
@@ -74,7 +102,12 @@ export function MyPlants() {
         <MyPlantsList
           data={myPlants}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <PlantCardSecondary plant={item} />}
+          renderItem={({ item }) => (
+            <PlantCardSecondary
+              plant={item}
+              onRemove={() => handleRemove(item)}
+            />
+          )}
         />
       </Content>
     </Container>

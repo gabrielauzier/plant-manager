@@ -44,3 +44,16 @@ export async function getSavedPlants(): Promise<PlantProps[]> {
     throw new Error(error as any);
   }
 }
+
+export async function removePlantById(id: string): Promise<void> {
+  try {
+    const data = await AsyncStorage.getItem("@plantmanager:plants");
+    const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
+
+    delete plants[id];
+
+    await AsyncStorage.setItem("@plantmanager:plants", JSON.stringify(plants));
+  } catch (error) {
+    throw new Error(error as any);
+  }
+}
