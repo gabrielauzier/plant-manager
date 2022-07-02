@@ -1,7 +1,7 @@
 import React from "react";
 import { RectButtonProps } from "react-native-gesture-handler";
 import { SvgFromUri } from "react-native-svg";
-import { PlantDTO } from "../../dtos/PlantDTO";
+import { PlantProps } from "../../libs/storage";
 
 import {
   Container,
@@ -13,7 +13,7 @@ import {
 } from "./styles";
 
 interface PlantCardSecondaryProps extends RectButtonProps {
-  plant?: PlantDTO;
+  plant: PlantProps;
 }
 
 export function PlantCardSecondary({
@@ -23,19 +23,12 @@ export function PlantCardSecondary({
   return (
     <Container {...rest}>
       <ImageWrapper>
-        <SvgFromUri
-          uri={
-            plant?.photo ??
-            "https://storage.googleapis.com/golden-wind/nextlevelweek/05-plantmanager/6.svg"
-          }
-          width={60}
-          height={60}
-        />
+        <SvgFromUri uri={plant.photo} width={60} height={60} />
       </ImageWrapper>
-      <Name>{plant?.name ?? "Yucca"}</Name>
+      <Name>{plant.name}</Name>
       <WaterTime>
         <WaterText>Regar às</WaterText>
-        <WaterHour>10:00</WaterHour>
+        <WaterHour>{plant.hourFormatted}</WaterHour>
       </WaterTime>
     </Container>
   );
