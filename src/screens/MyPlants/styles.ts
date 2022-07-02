@@ -1,5 +1,7 @@
+import { FlatList, FlatListProps } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
+import { PlantProps } from "../../libs/storage";
 
 export const Container = styled.View`
   flex: 1;
@@ -37,7 +39,7 @@ export const UserProfile = styled.Image`
 
 export const Content = styled.View`
   flex: 1;
-  padding: ${RFValue(16)}px ${RFValue(32)}px;
+  padding: 0 ${RFValue(32)}px;
 `;
 
 export const WateringTip = styled.View`
@@ -64,4 +66,12 @@ export const Subtitle = styled(Text)`
   font-size: ${RFValue(24)}px;
 
   margin: ${RFValue(40)}px 0 ${RFValue(16)}px;
+`;
+
+export const MyPlantsList = styled(
+  FlatList as new (props: FlatListProps<PlantProps>) => FlatList<PlantProps>
+).attrs({
+  showsVerticalScrollIndicator: false,
+})`
+  flex-grow: 1;
 `;
