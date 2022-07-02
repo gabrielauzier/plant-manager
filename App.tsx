@@ -15,6 +15,9 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { Routes } from "./src/routes";
 
+import { LogBox } from "react-native";
+import { AuthProvider } from "./src/hooks/auth";
+
 export default function App() {
   SplashScreen.preventAutoHideAsync();
   const [fontsLoaded] = useFonts({
@@ -24,18 +27,17 @@ export default function App() {
     Jost_600SemiBold,
   });
 
+  LogBox.ignoreLogs(["exported from 'deprecated-react-native-prop-types'."]);
+
   if (!fontsLoaded) return null;
   SplashScreen.hideAsync();
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar
-        style="dark"
-        backgroundColor="transparent"
-        translucent={false}
-      />
-
-      <Routes />
+      <AuthProvider>
+        <StatusBar style="dark" backgroundColor="transparent" />
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
